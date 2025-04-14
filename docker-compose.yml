@@ -1,0 +1,38 @@
+services:
+  database:
+    container_name: database-cloud-storage-project
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: Kb%8zh_1q
+      POSTGRES_DATABASE: CloudStorageProject
+    ports:
+      - "7203:7203"
+  server:
+    container_name: backend-server-cloud-storage
+    build: ./
+    image: cloud-storage-project-back:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:7203/CloudStorageProject
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Kb%8zh_1q
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_LIQUIBASE_URL: jdbc:postgresql://database:7203/CloudStorageProject
+      SPRING_LIQUIBASE_USER: postgres
+      SPRING_LIQUIBASE_PASSWORD: Kb%8zh_1q
+    ports:
+      - "9090:9090"
+    depends_on:
+      - database
+  client:
+    container_name: frontend-client-cloud-storage-project
+    build:
+      context: cloud-storage-project-frontend
+      dockerfile: Dockerfile
+    image: cloud-storage-project-front:latest
+    ports:
+      - "8080:8080"
+volumes:
+  postgres_data:

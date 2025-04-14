@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: migrations/create-table-user-entity.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: migrations/create-table-file-entity.yaml
+      relativeToChangelogFile: true

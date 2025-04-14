@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: evelina
+      changes:
+        - createTable:
+            tableName: file_entity
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+              - column:
+                  name: file_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: bytea
+                  constraints:
+                    nullable: false
+              - column:
+                  name: owner
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
